@@ -14,12 +14,12 @@ portRange = argv[2]
 portStart, portEnd = list(map(lambda x: int(x), portRange.split('-')))
 
 startTime = time.time()
-for i in range(portStart, portEnd):
+for i in range(portStart, portEnd+1):
     try:
         s = socket.create_connection((host, i))
         s.close()
-        print(f"Port {i} is open: {socket.getservbyport(i)}.")
+        print(f"Port {i}: {socket.getservbyport(i)} OPEN")
     except socket.error:
-        print(f"Port {i} is closed.")
+        pass
 endTime = time.time()
-print(f"Scanned {portEnd-portStart} ports in {'{:.2f}'.format(endTime-startTime)} seconds.")
+print(f"Scanned {portEnd-portStart+1} ports in {'{:.2f}'.format(endTime-startTime)} seconds.")
